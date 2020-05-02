@@ -15,10 +15,12 @@ function Beer(props) {
         <p>
           <em>{props.abv}% ABV</em>
         </p>
-        <p>Qty: {props.pint} pint</p>
+        {props.pint < 1 ? <p>Out of stock</p> : <p>Qty: {props.pint} pint</p>}
+        {props.pint <= 10 ? <p>Almost Empty</p> : " "}
       </div>
 
       <button onClick={onClickHandler}>Sell</button>
+
       <hr />
     </React.Fragment>
   );
