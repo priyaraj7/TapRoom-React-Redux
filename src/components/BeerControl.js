@@ -50,7 +50,7 @@ class BeerControl extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick = () => {
-    debugger;
+    // debugger;
     if (this.state.selectedBeer != null) {
       this.setState({
         formVisibleOnPage: false,
@@ -104,6 +104,23 @@ class BeerControl extends React.Component {
       selectedBeer: null,
     });
   };
+  // ......sell.......
+  handleSellBeer = (beerTosell) => {
+    const sellBeer = this.state.masterBeerList.map((beer) => {
+      if (beer.id !== beerTosell) {
+        return beer;
+      }
+      return {
+        ...beer,
+        pint: beer.pint - 1,
+      };
+    });
+    this.setState({
+      masterBeerList: sellBeer,
+      editing: false,
+      selectedBeer: null,
+    });
+  };
 
   render() {
     let currentlyVisibleState = null;
@@ -136,6 +153,7 @@ class BeerControl extends React.Component {
         <BeerList
           beerList={this.state.masterBeerList}
           onBeerSelection={this.handleChangingSelectedBeer}
+          onClickSell={this.handleSellBeer}
         />
       );
 

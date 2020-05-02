@@ -15,6 +15,7 @@ function BeerList(props) {
           price={beer.price}
           pint={beer.pint}
           description={beer.description}
+          onClickSell={props.onClickSell}
           id={beer.id}
           key={beer.id}
         />

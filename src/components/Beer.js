@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Beer(props) {
+  const onClickHandler = (ev) => {
+    ev.preventDefault();
+    props.onClickSell(props.id);
+  };
   return (
     <React.Fragment>
       <div onClick={() => props.whenBeerClicked(props.id)}>
@@ -11,8 +15,11 @@ function Beer(props) {
         <p>
           <em>{props.abv}% ABV</em>
         </p>
-        <hr />
+        <p>Qty: {props.pint} pint</p>
       </div>
+
+      <button onClick={onClickHandler}>Sell</button>
+      <hr />
     </React.Fragment>
   );
 }
@@ -23,6 +30,7 @@ Beer.propTypes = {
   abv: PropTypes.number,
   id: PropTypes.string,
   whenBeerClicked: PropTypes.func,
+  onClickSell: PropTypes.func,
 };
 
 export default Beer;
