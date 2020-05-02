@@ -20,11 +20,12 @@ function BeerDetail(props) {
         {beer.pint}
       </p>
       <p>
-        <b>Description: </b>${beer.description}
+        <b>Description: </b>
+        {beer.description}
       </p>
 
-      <button onClick={props.onClickingEdit}>Update Beer</button>
-      <button onClick={() => onClickingDelete(beer.id)}>Close Beer</button>
+      <button onClick={props.onClickingEdit}>Edit</button>
+      <button onClick={() => onClickingDelete(beer.id)}>Delete</button>
       <hr />
     </React.Fragment>
   );

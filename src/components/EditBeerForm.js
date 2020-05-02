@@ -2,14 +2,6 @@ import React from "react";
 import ReusableForm from "./ReusableForm";
 import PropTypes from "prop-types";
 
-// function EditTicketForm(props) {
-//   return (
-//     <React.Fragment>
-//       <ReusableForm buttonText="Update Ticket" />
-//     </React.Fragment>
-//   );
-// }
-
 function EditNewBeer(props) {
   const { beer } = props;
 
@@ -29,8 +21,8 @@ function EditNewBeer(props) {
   return (
     <React.Fragment>
       <ReusableForm
-        formSubmissionHandler={handleEditBeerFormSubmission} /* new code */
-        buttonText="Update Beer"
+        formSubmissionHandler={handleEditBeerFormSubmission}
+        buttonText="Update"
       />
     </React.Fragment>
   );
