@@ -1,31 +1,69 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Form, Button } from "react-bootstrap";
+import styles from "./beer.module.css";
 
 function ReusableForm(props) {
   return (
     <React.Fragment>
-      <form onSubmit={props.formSubmissionHandler}>
-        <input required type="text" name="name" placeholder="Beer Name" />
-        <input required type="text" name="brand" placeholder="Brand" />
-        <input
-          required
-          type="number"
-          name="abv"
-          placeholder="Alcohol Content"
-        />
-        <input required type="number" name="price" placeholder="Price" />
-        <input
-          required
-          type="number"
-          name="pint"
-          min="1"
-          max="124"
-          placeholder="Pints"
-        />
-        <textarea name="description" placeholder="Description." />
+      <div className={styles.form}>
+        <Form onSubmit={props.formSubmissionHandler}>
+          <Form.Group>
+            <Form.Control
+              required
+              type="text"
+              name="name"
+              placeholder="Beer Name"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              required
+              type="text"
+              name="brand"
+              placeholder="Brand"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              required
+              type="number"
+              name="abv"
+              placeholder="Alcohol Content"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              required
+              type="number"
+              name="price"
+              placeholder="Price"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              required
+              type="number"
+              name="pint"
+              min="1"
+              max="124"
+              placeholder="Pints"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              as="textarea"
+              required
+              name="description"
+              placeholder="Description."
+            />
+          </Form.Group>
 
-        <button type="submit">{props.buttonText}</button>
-      </form>
+          <Button variant="primary" type="submit">
+            {props.buttonText}
+          </Button>
+        </Form>
+      </div>
     </React.Fragment>
   );
 }

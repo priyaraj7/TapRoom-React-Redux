@@ -1,0 +1,44 @@
+.taproom {
+  padding: 60px;
+  text-align: center;
+
+  background: #808080;
+  color: white;
+  font-size: 50px;
+}
+
+.h3 {
+  color: #000000;
+  font: bolder;
+  font-family: Arial;
+}
+.brand {
+  color: #a52a2a;
+}
+.sell {
+  background-color: #1e90ff;
+  padding: 5px;
+  color: aliceblue;
+}
+
+/* reusable form */
+.form {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+/* Beer detail*/
+
+.h1 {
+  text-align: center;
+}

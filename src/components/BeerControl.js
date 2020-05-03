@@ -50,7 +50,6 @@ class BeerControl extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick = () => {
-    // debugger;
     if (this.state.selectedBeer != null) {
       this.setState({
         formVisibleOnPage: false,
@@ -112,7 +111,7 @@ class BeerControl extends React.Component {
       }
       return {
         ...beer,
-        pint: beer.pint - 1,
+        pint: parseInt(beer.pint) - 1,
       };
     });
     this.setState({

@@ -23,10 +23,12 @@ function NewBeerForm(props) {
 
   return (
     <React.Fragment>
+      <h2>Add Beer</h2>
       <ReusableForm
         formSubmissionHandler={handleNewBeerFormSubmission}
         buttonText="Submit!"
       />
+      <br />
     </React.Fragment>
   );
 }

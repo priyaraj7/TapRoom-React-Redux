@@ -1,6 +1,7 @@
 import React from "react";
 import ReusableForm from "./ReusableForm";
 import PropTypes from "prop-types";
+import styles from "./beer.module.css";
 
 function EditNewBeer(props) {
   const { beer } = props;
@@ -20,10 +21,13 @@ function EditNewBeer(props) {
 
   return (
     <React.Fragment>
-      <ReusableForm
-        formSubmissionHandler={handleEditBeerFormSubmission}
-        buttonText="Update"
-      />
+      <div className={styles.edit}>
+        <h2>Edit Beer Form</h2>
+        <ReusableForm
+          formSubmissionHandler={handleEditBeerFormSubmission}
+          buttonText="Update"
+        />
+      </div>
     </React.Fragment>
   );
 }
@@ -32,5 +36,4 @@ EditNewBeer.propTypes = {
   onEditBeer: PropTypes.func,
 };
 
-// export default EditTicketForm;
 export default EditNewBeer;

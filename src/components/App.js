@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import { Container } from "react-bootstrap";
+
 import BeerControl from "./BeerControl";
 //import BeerList from "./BeerList";
 //import "./App.css";
@@ -8,8 +9,8 @@ import BeerControl from "./BeerControl";
 function App() {
   return (
     <React.Fragment>
+      <Header />
       <Container>
-        <Header />
         <br />
         <BeerControl />
       </Container>
