@@ -1,3 +1,5 @@
+# TapRoom
+![Component Diagram](https://github.com/priyaraj7/TapRoom/raw/master/src/assets/diagram.png)  
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
