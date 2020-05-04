@@ -19,10 +19,9 @@ function Beer(props) {
         onClick={() => props.whenBeerClicked(props.id)}
       >
         <h3 className={styles.h3}>{props.name}</h3>
-        <p className={styles.brand}>{props.brand}</p>
-
-        <p>{props.abv}% ABV</p>
-        <p>{props.pint}</p>
+        <div className={styles.brand}>{props.brand}</div>
+        <div>{props.abv}% ABV</div>
+        <div>Qty: {props.pint} pint</div>
         {stock}
       </div>
       <div className={styles.beer}>
