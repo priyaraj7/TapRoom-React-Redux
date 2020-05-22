@@ -3,146 +3,114 @@ import NewBeerForm from "./NewBeerForm";
 import BeerList from "./BeerList";
 import BeerDetail from "./BeerDetail";
 import EditBeerForm from "./EditBeerForm";
-import { v4 } from "uuid";
-
-const masterBeerList = [
-  {
-    name: "Gunbuster",
-    brand: "Loowit Brewing Company",
-    abv: 6.3,
-    price: 24,
-    pint: 54,
-    description:
-      "An easy drinking India Pale Ale featuring Simcoe, Cascade and Mosaic hops and a crisp, dry finish. Piney balanced with hints of citrus on the nose. Dry hopped on multiple occasions, including high krausen, and bunged before terminal gravity was reached to concentrate hop aroma and generate thick, creamy, aroma packed beer foam.",
-    id: v4(),
-  },
-  {
-    name: "Mo-haze-ic",
-    brand: "Migration Brewing",
-    abv: 6.1,
-    price: 20,
-    pint: 23,
-    description:
-      'bit aggressively hopped IPA, 3 pounds per barrel and over 20 pounds of Mosaics create a juicy, tropical hop delight. Only using a small late boil addition and heavy dry hop additions leaves this IPA with very little perceived bitterness and a juice explosion of hop flavor, loaded with berry, passion fruit, papaya, orange and tropical aromas. Domestic Two-row along with along with a high percentage of wheat create a pale, full-bodied ale that let the hops do all the work. This hazy will be sure to leave saying, "Gimme some mo!"',
-    id: v4(),
-  },
-  {
-    name: " Blood Orange IPA",
-    brand: "Lucky Envelope Brewing",
-    abv: 6.7,
-    price: 12,
-    pint: 108,
-    description:
-      "Blood Orange infused into Lucky Envelope's IPA for distinctly orange citrus notes complementing the base beer.",
-    id: v4(),
-  },
-];
+import { connect } from "react-redux";
 
 class BeerControl extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      formVisibleOnPage: false,
-      masterBeerList: [...masterBeerList],
-      selectedBeer: null,
-      editing: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
+    // this.state = {
+    //   formVisibleOnPage: false,
+    //   masterBeerList: [...masterBeerList],
+    //   selectedBeer: null,
+    //   editing: false,
+    // };
   }
-  handleClick = () => {
-    if (this.state.selectedBeer != null) {
-      this.setState({
-        formVisibleOnPage: false,
-        selectedBeer: null,
-        editing: false,
-      });
-    } else {
-      this.setState((prevState) => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage,
-      }));
-    }
-  };
+  // handleClick = () => {
+  //   if (this.state.selectedBeer != null) {
+  //     this.setState({
+  //       formVisibleOnPage: false,
+  //       selectedBeer: null,
+  //       editing: false,
+  //     });
+  //   } else {
+  //     this.setState((prevState) => ({
+  //       formVisibleOnPage: !prevState.formVisibleOnPage,
+  //     }));
+  //   }
+  // };
 
-  handleAddingNewBeerToList = (newBeer) => {
-    const newMasterBeerList = this.state.masterBeerList.concat(newBeer);
-    this.setState({
-      masterBeerList: newMasterBeerList,
-      formVisibleOnPage: false,
-    });
-  };
+  // handleAddingNewBeerToList = (newBeer) => {
+  //   const newMasterBeerList = this.state.masterBeerList.concat(newBeer);
+  //   this.setState({
+  //     masterBeerList: newMasterBeerList,
+  //     formVisibleOnPage: false,
+  //   });
+  // };
 
-  handleChangingSelectedBeer = (id) => {
-    const selectedBeer = this.state.masterBeerList.filter(
-      (beer) => beer.id === id
-    )[0];
-    this.setState({ selectedBeer: selectedBeer });
-  };
+  // handleChangingSelectedBeer = (id) => {
+  //   const selectedBeer = this.state.masterBeerList.filter(
+  //     (beer) => beer.id === id
+  //   )[0];
+  //   this.setState({ selectedBeer: selectedBeer });
+  // };
 
-  handleDeletingBeer = (id) => {
-    const newMasterBeerList = this.state.masterBeerList.filter(
-      (beer) => beer.id !== id
-    );
-    this.setState({
-      masterBeerList: newMasterBeerList,
-      selectedBeer: null,
-    });
-  };
+  // handleDeletingBeer = (id) => {
+  //   const newMasterBeerList = this.state.masterBeerList.filter(
+  //     (beer) => beer.id !== id
+  //   );
+  //   this.setState({
+  //     masterBeerList: newMasterBeerList,
+  //     selectedBeer: null,
+  //   });
+  // };
 
-  handleEditClick = () => {
-    console.log("handleEditClick reached!");
-    this.setState({ editing: true });
-  };
+  // handleEditClick = () => {
+  //   console.log("handleEditClick reached!");
+  //   this.setState({ editing: true });
+  // };
 
-  handleEditingBeerInList = (beerToEdit) => {
-    const editedMasterBeerList = this.state.masterBeerList
-      .filter((beer) => beer.id !== this.state.selectedBeer.id)
-      .concat(beerToEdit);
-    this.setState({
-      masterBeerList: editedMasterBeerList,
-      editing: false,
-      selectedBeer: null,
-    });
-  };
-  // ......sell.......
-  handleSellBeer = (beerTosell) => {
-    const sellBeer = this.state.masterBeerList.map((beer) => {
-      if (beer.id !== beerTosell) {
-        return beer;
-      }
-      return {
-        ...beer,
-        pint: parseInt(beer.pint) - 1,
-      };
-    });
-    this.setState({
-      masterBeerList: sellBeer,
-      editing: false,
-      selectedBeer: null,
-    });
-  };
+  // handleEditingBeerInList = (beerToEdit) => {
+  //   const editedMasterBeerList = this.state.masterBeerList
+  //     .filter((beer) => beer.id !== this.state.selectedBeer.id)
+  //     .concat(beerToEdit);
+  //   this.setState({
+  //     masterBeerList: editedMasterBeerList,
+  //     editing: false,
+  //     selectedBeer: null,
+  //   });
+  // };
+  // // ......sell.......
+  // handleSellBeer = (beerTosell) => {
+  //   const sellBeer = this.state.masterBeerList.map((beer) => {
+  //     if (beer.id !== beerTosell) {
+  //       return beer;
+  //     }
+  //     return {
+  //       ...beer,
+  //       pint: parseInt(beer.pint) - 1,
+  //     };
+  //   });
+  //   this.setState({
+  //     masterBeerList: sellBeer,
+  //     editing: false,
+  //     selectedBeer: null,
+  //   });
+  // };
 
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
+    let buttonAction = null;
 
-    if (this.state.editing) {
-      currentlyVisibleState = (
-        <EditBeerForm
-          beer={this.state.selectedBeer}
-          onEditBeer={this.handleEditingBeerInList}
-        />
-      );
-      buttonText = "Return to detail page";
-    } else if (this.state.selectedBeer != null) {
-      currentlyVisibleState = (
-        <BeerDetail
-          beer={this.state.selectedBeer}
-          onClickingDelete={this.handleDeletingBeer}
-          onClickingEdit={this.handleEditClick}
-        />
-      );
-      buttonText = "Return to Beer List";
-    } else if (this.state.formVisibleOnPage) {
+    // if (this.state.editing) {
+    //   currentlyVisibleState = (
+    //     <EditBeerForm
+    //       beer={this.state.selectedBeer}
+    //       onEditBeer={this.handleEditingBeerInList}
+    //     />
+    //   );
+    //   buttonText = "Return to detail page";
+    // } else if (this.state.selectedBeer != null) {
+    //   currentlyVisibleState = (
+    //     <BeerDetail
+    //       beer={this.state.selectedBeer}
+    //       onClickingDelete={this.handleDeletingBeer}
+    //       onClickingEdit={this.handleEditClick}
+    //     />
+    //   );
+    //   buttonText = "Return to Beer List";
+    // } else
+    if (this.props.formVisibleOnPage === "addForm") {
       currentlyVisibleState = (
         <NewBeerForm onNewBeerCreation={this.handleAddingNewBeerToList} />
       );
@@ -150,9 +118,9 @@ class BeerControl extends React.Component {
     } else {
       currentlyVisibleState = (
         <BeerList
-          beerList={this.state.masterBeerList}
-          onBeerSelection={this.handleChangingSelectedBeer}
-          onClickSell={this.handleSellBeer}
+          beerList={this.props.masterBeerList}
+          // onBeerSelection={this.handleChangingSelectedBeer}
+          // onClickSell={this.handleSellBeer}
         />
       );
 
@@ -166,5 +134,9 @@ class BeerControl extends React.Component {
     );
   }
 }
+const mapStateToProp = (state) => ({
+  masterBeerList: state.masterBeerList,
+  formVisibleOnPage: state.formVisibleOnPage,
+});
 
-export default BeerControl;
+export default connect(mapStateToProp)(BeerControl);
