@@ -1,6 +1,11 @@
 import { v4 } from "uuid";
-import { ADD_BEER, REMOVE_BEER, UPDATE_BEER } from "../actions/index";
-const DEFAULT_BEER_LIST = [
+import {
+  ADD_BEER,
+  REMOVE_BEER,
+  UPDATE_BEER,
+  SELL_BEER,
+} from "../actions/index";
+export const DEFAULT_BEER_LIST = [
   {
     name: "Gunbuster",
     brand: "Loowit Brewing Company",
@@ -37,14 +42,25 @@ export default (state = DEFAULT_BEER_LIST, action) => {
   switch (action.type) {
     case ADD_BEER:
       return [...state, { ...action.payload, id: v4() }];
+
     case REMOVE_BEER:
-      return state.filter((beer) => beer.id === action.payload.id);
+      return state.filter((beer) => beer.id !== action.payload.id);
     case UPDATE_BEER:
       return state.map((beer) => {
         if (beer.id === action.payload.id) {
           return {
             ...beer,
             ...action.payload,
+          };
+        }
+        return beer;
+      });
+    case SELL_BEER:
+      return state.map((beer) => {
+        if (beer.id === action.payload.id) {
+          return {
+            ...beer,
+            pint: parseInt(beer.pint) - 1,
           };
         }
         return beer;

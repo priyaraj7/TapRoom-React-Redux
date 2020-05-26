@@ -4,139 +4,104 @@ import BeerList from "./BeerList";
 import BeerDetail from "./BeerDetail";
 import EditBeerForm from "./EditBeerForm";
 import { connect } from "react-redux";
+import {
+  editBeer,
+  showDetailPage,
+  addBeer,
+  showAddForm,
+  showListPage,
+  updateBeer,
+  removeBeer,
+  sellBeer,
+} from "../actions";
 
-class BeerControl extends React.Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   formVisibleOnPage: false,
-    //   masterBeerList: [...masterBeerList],
-    //   selectedBeer: null,
-    //   editing: false,
-    // };
-  }
-  // handleClick = () => {
-  //   if (this.state.selectedBeer != null) {
-  //     this.setState({
-  //       formVisibleOnPage: false,
-  //       selectedBeer: null,
-  //       editing: false,
-  //     });
-  //   } else {
-  //     this.setState((prevState) => ({
-  //       formVisibleOnPage: !prevState.formVisibleOnPage,
-  //     }));
-  //   }
-  // };
-
-  // handleAddingNewBeerToList = (newBeer) => {
-  //   const newMasterBeerList = this.state.masterBeerList.concat(newBeer);
-  //   this.setState({
-  //     masterBeerList: newMasterBeerList,
-  //     formVisibleOnPage: false,
-  //   });
-  // };
-
-  // handleChangingSelectedBeer = (id) => {
-  //   const selectedBeer = this.state.masterBeerList.filter(
-  //     (beer) => beer.id === id
-  //   )[0];
-  //   this.setState({ selectedBeer: selectedBeer });
-  // };
-
-  // handleDeletingBeer = (id) => {
-  //   const newMasterBeerList = this.state.masterBeerList.filter(
-  //     (beer) => beer.id !== id
-  //   );
-  //   this.setState({
-  //     masterBeerList: newMasterBeerList,
-  //     selectedBeer: null,
-  //   });
-  // };
-
-  // handleEditClick = () => {
-  //   console.log("handleEditClick reached!");
-  //   this.setState({ editing: true });
-  // };
-
-  // handleEditingBeerInList = (beerToEdit) => {
-  //   const editedMasterBeerList = this.state.masterBeerList
-  //     .filter((beer) => beer.id !== this.state.selectedBeer.id)
-  //     .concat(beerToEdit);
-  //   this.setState({
-  //     masterBeerList: editedMasterBeerList,
-  //     editing: false,
-  //     selectedBeer: null,
-  //   });
-  // };
-  // // ......sell.......
-  // handleSellBeer = (beerTosell) => {
-  //   const sellBeer = this.state.masterBeerList.map((beer) => {
-  //     if (beer.id !== beerTosell) {
-  //       return beer;
-  //     }
-  //     return {
-  //       ...beer,
-  //       pint: parseInt(beer.pint) - 1,
-  //     };
-  //   });
-  //   this.setState({
-  //     masterBeerList: sellBeer,
-  //     editing: false,
-  //     selectedBeer: null,
-  //   });
-  // };
-
-  render() {
-    let currentlyVisibleState = null;
-    let buttonText = null;
-    let buttonAction = null;
-
-    // if (this.state.editing) {
-    //   currentlyVisibleState = (
-    //     <EditBeerForm
-    //       beer={this.state.selectedBeer}
-    //       onEditBeer={this.handleEditingBeerInList}
-    //     />
-    //   );
-    //   buttonText = "Return to detail page";
-    // } else if (this.state.selectedBeer != null) {
-    //   currentlyVisibleState = (
-    //     <BeerDetail
-    //       beer={this.state.selectedBeer}
-    //       onClickingDelete={this.handleDeletingBeer}
-    //       onClickingEdit={this.handleEditClick}
-    //     />
-    //   );
-    //   buttonText = "Return to Beer List";
-    // } else
-    if (this.props.formVisibleOnPage === "addForm") {
-      currentlyVisibleState = (
-        <NewBeerForm onNewBeerCreation={this.handleAddingNewBeerToList} />
-      );
-      buttonText = "Return to Beer List";
+const BeerControl = (props) => {
+  const handleClick = () => {
+    if (props.currentPage === "BEER_LIST") {
+      props.showAddForm();
+    } else if (props.currentPage === "updateForm") {
+      props.showDetailPage(props.selectedBeer);
     } else {
-      currentlyVisibleState = (
-        <BeerList
-          beerList={this.props.masterBeerList}
-          // onBeerSelection={this.handleChangingSelectedBeer}
-          // onClickSell={this.handleSellBeer}
-        />
-      );
-
-      buttonText = "Add Beer";
+      props.showListPage();
     }
-    return (
-      <React.Fragment>
-        {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button>
-      </React.Fragment>
+  };
+  let currentlyVisibleState = null;
+  let buttonText = null;
+  const selectedBeer = props.masterBeerList.find(
+    (b) => b.id === props.selectedBeer
+  );
+
+  if (props.selectedBeer != null && props.currentPage === "updateForm") {
+    currentlyVisibleState = (
+      <EditBeerForm beer={selectedBeer} onEditBeer={props.updateBeer} />
     );
+    buttonText = "Return to detail page";
+  } else if (props.selectedBeer != null && props.currentPage === "detailPage") {
+    currentlyVisibleState = (
+      <BeerDetail
+        beer={selectedBeer}
+        onClickingDelete={props.deleteBeer}
+        onClickingEdit={props.editBeer}
+      />
+    );
+    buttonText = "Return to Beer List";
+  } else if (props.currentPage === "addForm") {
+    currentlyVisibleState = <NewBeerForm onNewBeerCreation={props.addBeer} />;
+    buttonText = "Return to Beer List";
+  } else {
+    currentlyVisibleState = (
+      <BeerList
+        beerList={props.masterBeerList}
+        onBeerSelection={props.showDetailPage}
+        onClickSell={props.sellBeer}
+      />
+    );
+
+    buttonText = "Add Beer";
   }
-}
+  return (
+    <React.Fragment>
+      {currentlyVisibleState}
+      <button onClick={handleClick}>{buttonText}</button>
+    </React.Fragment>
+  );
+};
+
 const mapStateToProp = (state) => ({
   masterBeerList: state.masterBeerList,
-  formVisibleOnPage: state.formVisibleOnPage,
+  currentPage: state.formVisibleOnPage.currentPage,
+  selectedBeer: state.formVisibleOnPage.selectedBeer,
 });
 
-export default connect(mapStateToProp)(BeerControl);
+const mapActionToProps = (dispatch) => ({
+  showDetailPage: (id) => {
+    dispatch(showDetailPage(id));
+  },
+  showAddForm: () => {
+    dispatch(showAddForm());
+  },
+  showListPage: () => {
+    dispatch(showListPage());
+  },
+  addBeer: (beer) => {
+    dispatch(addBeer(beer));
+    dispatch(showListPage());
+  },
+  editBeer: (id) => {
+    dispatch(editBeer(id));
+  },
+  updateBeer: (beer) => {
+    dispatch(updateBeer(beer));
+    dispatch(showListPage());
+  },
+  deleteBeer: (id) => {
+    dispatch(removeBeer(id));
+    dispatch(showListPage());
+  },
+  sellBeer: (id) => {
+    dispatch(sellBeer(id));
+    dispatch(showListPage());
+  },
+});
+
+export default connect(mapStateToProp, mapActionToProps)(BeerControl);

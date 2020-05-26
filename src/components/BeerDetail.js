@@ -26,7 +26,13 @@ function BeerDetail(props) {
           {beer.description}
         </p>
 
-        <button onClick={props.onClickingEdit}>Edit</button>
+        <button
+          onClick={() => {
+            props.onClickingEdit(beer.id);
+          }}
+        >
+          Edit
+        </button>
         <button onClick={() => onClickingDelete(beer.id)}>Delete</button>
         <hr />
       </div>

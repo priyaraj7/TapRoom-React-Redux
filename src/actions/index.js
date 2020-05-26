@@ -2,9 +2,11 @@
 export const ADD_BEER = "ADD_BEER";
 export const REMOVE_BEER = "REMOVE_BEER";
 export const UPDATE_BEER = "UPDATE_BEER";
-export const TOGGLE_FORM = "TOGGLE_FORM";
 export const SHOW_ADD_FORM = "SHOW_ADD_FORM";
-export const SHOW_UPDATE_FORM = "SHOW_UPDATE_FORM";
+export const SHOW_DETAIL_PAGE = " SHOW_DETAIL_PAGE";
+export const SHOW_EDIT_FORM = "SHOW_EDIT_FORM";
+export const SHOW_LIST_PAGE = "SHOW_LIST_PAGE";
+export const SELL_BEER = "SELL_BEER";
 
 // action creator function
 export const showAddForm = () => ({
@@ -12,9 +14,11 @@ export const showAddForm = () => ({
   payload: {},
 });
 
-export const showUpdateForm = () => ({
-  type: SHOW_UPDATE_FORM,
-  payload: {},
+export const editBeer = (id) => ({
+  type: SHOW_EDIT_FORM,
+  payload: {
+    id: id,
+  },
 });
 
 export const addBeer = ({ name, abv, description, price, pint, brand }) => ({
@@ -27,10 +31,6 @@ export const addBeer = ({ name, abv, description, price, pint, brand }) => ({
     pint,
     brand,
   },
-});
-
-export const toggleForm = () => ({
-  type: TOGGLE_FORM,
 });
 
 export const removeBeer = (id) => ({
@@ -57,6 +57,26 @@ export const updateBeer = ({
     price,
     pint,
     description,
+    id,
+  },
+});
+
+export const showDetailPage = (id) => ({
+  type: SHOW_DETAIL_PAGE,
+  payload: {
+    id,
+  },
+});
+
+export const showListPage = () => ({
+  type: SHOW_LIST_PAGE,
+  payload: {},
+});
+
+export const sellBeer = (id, pint = 1) => ({
+  type: SELL_BEER,
+  payload: {
+    pint,
     id,
   },
 });
