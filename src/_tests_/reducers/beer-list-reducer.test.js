@@ -72,6 +72,7 @@ describe("beerListReducer", () => {
       },
     ]);
   });
+
   test("Should successfully update beer to masterBeerList", () => {
     const updatedBeer = {
       name: "update beer 1",
@@ -99,13 +100,14 @@ describe("beerListReducer", () => {
       price: 21,
       pint: 11,
       description: "new description 1",
-      id: 1,
+      id: 10,
     };
     action = {
       type: SELL_BEER,
       payload: { ...beer },
     };
-    expect(beerListReducer([beer], action)).toEqual([
+    expect(beerListReducer([...currentState, beer], action)).toEqual([
+      ...currentState,
       {
         name: "beer 1",
         brand: "brand 1",
@@ -113,7 +115,7 @@ describe("beerListReducer", () => {
         price: 21,
         pint: 10,
         description: "new description 1",
-        id: 1,
+        id: 10,
       },
     ]);
   });
