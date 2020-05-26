@@ -6,12 +6,12 @@ import {
   UPDATE_BEER,
 } from "../actions/index";
 
-const updateForm = {
+const DEFAULT_STATE = {
   currentPage: "BEER_LIST",
   selectedBeer: undefined,
 };
 
-export default (state = updateForm, action) => {
+export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case SHOW_ADD_FORM:
       return {

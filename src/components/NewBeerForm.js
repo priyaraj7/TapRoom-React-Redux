@@ -16,9 +16,6 @@ function NewBeerForm(props) {
       description: event.target.description.value,
       id: v4(),
     });
-    console.log(event.target.name.value);
-    console.log(event.target.brand.value);
-    console.log(event.target.abv.value);
   }
 
   return (

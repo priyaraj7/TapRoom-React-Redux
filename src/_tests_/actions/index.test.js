@@ -1,4 +1,4 @@
-import * as actions from "../actions/index";
+import * as actions from "../../actions/index";
 
 describe("tap room actions", () => {
   it("addBeer should create ADD_BEER action", () => {
@@ -30,12 +30,6 @@ it("deleteBeer should create REMOVE_BEER action", () => {
     payload: {
       id: 1,
     },
-  });
-});
-
-it("toggleFrom should create TOGGLE_FORM action", () => {
-  expect(actions.toggleForm()).toEqual({
-    type: actions.TOGGLE_FORM,
   });
 });
 

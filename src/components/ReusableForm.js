@@ -105,4 +105,12 @@ ReusableForm.propTypes = {
   buttonText: PropTypes.string,
 };
 
+ReusableForm.defaultProps = {
+  name: "",
+  brand: "",
+  price: "",
+  pint: "",
+  description: "",
+  abv: "",
+};
 export default ReusableForm;
